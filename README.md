@@ -10,9 +10,7 @@
         - Consumer Price Index (Inflation) (series_id=CPIAUCSL)
   - Economic News Sentiment (BBC RSS): for fetching real time economic news data that would affect the market. It was collected using an API.
         - headline – News article titles related to macroeconomic trends. keywords like 'interest rate', 'inflation', 'central bank', 'monetary policy'.
-        - datetime – Publication time of the news.
-        - rounded_time – Adjusted news timestamp for merging with forex data.
-
+    
 - Outline what you plan to predict.  How might this prediction be used in production or in practice?
     - key market actions:  Buy/Sell signals 
 
