@@ -1,13 +1,13 @@
 - Data sources are:
   - OANDA : forex market data Collected via API, updated in real-time based on forex market transactions. We have columns like:
-        - time – Timestamp of each price movement (30-minute intervals). 
-        - open, high, low, close – Price levels for the given timeframe.
-          - volume – Total trading volume within the period.
+    - time – Timestamp of each price movement (30-minute intervals).
+    - open, high, low, close – Price levels for the given timeframe.
+    - volume – Total trading volume within the period.
   - FRED (Federal Reserve Economic Data): For macroeconomics data  regarding:
-        - GDP Growth Rate (series_id=GDPC1)
-        - Unemployment Rate (series_id=UNRATE)
-        - Interest Rates (10-Year Treasury) (series_id=DGS10)
-        - Consumer Price Index (Inflation) (series_id=CPIAUCSL)
+    - GDP Growth Rate (series_id=GDPC1)
+    - Unemployment Rate (series_id=UNRATE)
+    - Interest Rates (10-Year Treasury) (series_id=DGS10)
+    - Consumer Price Index (Inflation) (series_id=CPIAUCSL)
   - Economic News Sentiment (BBC RSS): for fetching real time economic news data that would affect the market. It was collected using an API.
       - headline :  News article titles related to macroeconomic trends. keywords like 'interest rate', 'inflation', 'central bank', 'monetary policy'.
     
