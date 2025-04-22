@@ -48,11 +48,13 @@
 
 - Model fitting
     - Train / test splitting
-      - How was this performed? How did you decide the train/test sizes?
-
+      - was based on date-based segmentation, meaning you divided the dataset chronologically rather than randomly.
+        - Train: 70% of historical dates
+        - Validation: 15% of historical datesTest:
+        - Final 15% (latest dates)
+          
 - Does your dataset have a risk of data leakage? Describe those risks.
-
-    - Risk of timestamp misalignment since we are merging a dataset which updates every 30 minutes, a dataset that updates quarterly/yearly and a dataset   that is updated as soon as anything related to the keywords is mentioned.
+    - Risk of timestamp misalignment since we are merging a dataset which updates every 30 minutes, a dataset that updates quarterly/yearly and lastly a dataset that is updated as soon as anything related to the keywords is mentioned.
 
 - Which model did you select, why?
     - XGBoost Classifier: it is used to make time-based predictions based on historical data and it does better.  
@@ -74,7 +76,9 @@
     ?
 
 - Going further we will work on 
+    - Balancing of target variables since there are more hold signals
     - finding access to a real time macroeconomics data  to improve trade accuracy,   
     - Make better prediction test cases.
+      
 
 
