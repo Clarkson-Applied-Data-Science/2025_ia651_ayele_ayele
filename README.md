@@ -22,7 +22,7 @@ We initially downloaded a dataset with identical structure to OANDA forex data b
 
 Aside from the incompatibility between the two datasets, we also aim to focus on swing trading in this project, which requires short to medium-term price movements, something that the infrequently updated FRED data lacks.
 
-Our dataset also showed imbalancement in target classes (Buy/Sell/Hold), influenced by the daily volatility of incoming live data. To address this, we applied RandomOverSampling to balance the dataset. We have used four machine learning models in this project to build our model: ARIMA, Random Forest, RNN, and LSTM. To optimize model performance, we used GridSearchCV, RandomizedSearchCV, and Keras' built-in tools to find the best hyperparameters.
+Our dataset also showed imbalancement in target classes (Buy/Sell/Hold), influenced by the daily volatility of incoming live data. To address this, we applied RandomOverSampling to balance the dataset. We have used four machine learning models in this project to build our model: ARIMA, Random Forest, RNN, and LSTM. To optimize model performance, we used GridSearchCV, RandomizedSearchCV, and Keras' built-in tools to find the best hyperparameters for each model.
 
 ## Exploratory Data Analysis (EDA)
 
