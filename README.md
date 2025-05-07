@@ -1,84 +1,74 @@
-- Data sources are:
-  - OANDA : forex market data Collected via API, updated in real-time based on forex market transactions. We have columns like:
-    - time – Timestamp of each price movement (30-minute intervals).
-    - open, high, low, close – Price levels for the given timeframe.
-    - volume – Total trading volume within the period.
-  - FRED (Federal Reserve Economic Data): For macroeconomics data  regarding:
-    - GDP Growth Rate (series_id=GDPC1)
-    - Unemployment Rate (series_id=UNRATE)
-    - Interest Rates (10-Year Treasury) (series_id=DGS10)
-    - Consumer Price Index (Inflation) (series_id=CPIAUCSL)
-  - Economic News Sentiment (BBC RSS): for fetching real time economic news data that would affect the market. It was collected using an API.
-      - headline :  News article titles related to macroeconomic trends. keywords like 'interest rate', 'inflation', 'central bank', 'monetary policy'.
-    
-- Outline what you plan to predict.  How might this prediction be used in production or in practice?
-    - key market actions:  Buy/Sell signals 
+**Forecasting of Forex Market Based on Machine Learning Algorithms**
 
-- Process overview 
-    - Initially, we downloaded a dataset with the same columns as the OANDA forex dataset but realized it did not provide real-time updates, only data up to the download timestamp. Since our project required the most recent market data, we decided to rely on OANDA forex data alone for predictions, applying feature engineering on OHLCV (open, high, low, close, volume, time).
-    To improve trading accuracy, we later integrated macroeconomic indicators from FRED and news sentiment from BBC RSS.
-    - During this process, we encountered timestamp mismatches:
-        - OANDA updates every 30 minutes, while FRED updates quarterly/yearly, leading to many NaN values.
-        - To resolve this, we resampled FRED data to daily intervals, ensuring macroeconomic trends aligned better with forex price movements.
-- EDA 
-  - What are your X and Y variables?
-      - X is all the feature in the dataset 
-      - Y is Signal (Buy, Sell, Hold)
+**Introduction**
+The project explains how we can apply machine learning algorithms for forex market trend prediction with the help of past market data. The algorithms implemented in this project are ARIMA, Random Forest, RNN, and LSTM. The algorithms utilized here consume the past market data (500 days) of EURUSD, and make use of technical indicators like moving averages, Relative Strength Indicator(RSI), Bollinger Bands, and others to teach our models. 
 
-- Classification or regression?  
-    - Classification
+**Data Sources**
+OANDA: Foreign exchange market real-time data collected via API. 
+The data contains:
+time: Timestamp of each price action (30-minute intervals).
+open, high, low, close: Prices for each interval.
+volume: The volume traded during the interval.
 
-- How many observations?
-    - 500
+**Prediction Objective**
+The goal is to provide predictions of Buy/Sell signals for the forex market. These predictions will help to inform trading decisions in real-time or aid in automated trading systems so that we can make calculated risks based on market states.
 
-- What is the distribution of each feature?  You don't need to show every feature's distribution. 
-    - There are more hold signals compared to buy or sell. We will need to balance the target labels if necessary. 
-    - Macroeconomic Indicators have low variance compared to the high-frequency forex price movements because they are updated quarterly/yearly. This could make predictions too dependent on outdated macro trends. 
+**Process Overview**
+We initially downloaded a dataset with identical structure to OANDA forex data but realized it did not provide real-time updates. Hence, we decided to use OANDA forex data only and applied feature engineering techniques on (open, high, low, close, volume, time).To improve the accuracy of predictions, macroeconomic data from FRED; however, OANDA updates in 30-minutes intervals, while FRED updates quarterly/yearly. So, we decided to drop the extra dataset as it was adding less variance to our data.
 
-- Correlation - are some features strongly correlated?  
+Aside from the incompatibility between the two datasets, we also aim to focus on swing trading in this project, which requires short to medium term price movements, something that the infrequently updated FRED data lacks. 
 
-- Feature importance.
-    - We are using features we have engineered to get these technical indicators, We can use them to capture trend, volatility, and price momentum (EMA, RSI, MACD, Bollinger Bands, ATR)
-    - Macroeconomic factors in the market (CPIAUCSL, GDPC1, UNRATE, DGS10).
-    -  And news-driven market reactions from the headlines
+Our dataset also showed imbalancement in target classes (Buy/Sell/Hold), influenced by the daily volatility of incoming live data. To address this, we applied RandomOverSampling to balance the dataset. We have used four machine learning models in this project to build our model: ARIMA, Random Forest, RNN, and LSTM. To optimize model performance, we used GridSearchCV, RandomizedSearchCV, and Keras' built-in tools to find the best hyperparameters.
 
-- Feature engineering
-  - Which features needed feature engineering? 
-      - Feature engineering was done to transform raw forex and macroeconomic data into meaningful insights for predictions. We will be using most of the transformed data.
+**Exploratory Data Analysis (EDA)**
+Number of Observations: 500
+X and Y Variables:
+X: Features extracted from the dataset (open, high, low, close, volume) along with engineered indicators such as MACD, RSI, future return, volatility bands, and other trend indicator signals.
+Y: Target variable representing trading signals — Buy (1), Sell (2), Hold (0).
 
-- Model fitting
-    - Train / test splitting
-      - was based on date-based segmentation, meaning you divided the dataset chronologically rather than randomly.
-        - Train: 70% of historical dates
-        - Validation: 15% of historical datesTest:
-        - Final 15% (latest dates)
-          
-- Does your dataset have a risk of data leakage? Describe those risks.
-    - Risk of timestamp misalignment since we are merging a dataset which updates every 30 minutes, a dataset that updates quarterly/yearly and lastly a dataset that is updated as soon as anything related to the keywords is mentioned.
+Feature Correlation
+**[Placeholder: Feature Correlation Image and Interpretation]**
 
-- Which model did you select, why?
-    - XGBoost Classifier: it is used to make time-based predictions based on historical data and it does better.  
+Model Selection:
+The task is a classification problem, where we predict discrete classes (Buy/Sell/Hold).
 
-- What was the process for hyper parameter selection if applicable.  
-    - GridSeachCV was used to select hyperparameters. 
+Model Fitting: 
+Train-Test Split and Data Leakage Risk:
+To make a realistic evaluation, the dataset was chronologically ordered and split into three distinct segments:
+Training Data: 70% of the earliest historical data
+Validation Data: 15% of the mid-range data
+Test Data: Final 15% representing the most recent data
 
-- Validation / metrics
-    - Which metrics did you weigh most heavily, why?
-        - Accuracy, Recall and r^2
-            - Confusion matrix and confusion discussion for classification problems
-        -  Highlight model weaknesses
-        - Give 2-4 prediction examples from your data.
-        - Give 2 prediction examples which are new or synthesized. 
+This time-based splitting approach avoids lookahead bias that would have been caused due to the 30minutes interval records, ensuring that future values are not leaked into the training process.The feature data was prepared by dropping non-numeric and identifier columns *(date_only, time, signal)* and separating the target variable *signal*, which represents Buy, Sell, or Hold actions. 
 
-- Overfitting/Underfitting
-    - We are using  grid search hyperparameters  in order to mitigate overfitting. We will be doing more accuracy tests between the training and test splits to see if the model is overfitting or underfitting. 
-- Production  
-    ?
+To address class imbalance, RandomOverSampler from imblearn was applied to the training set. This step resampled the data to ensure that each class (Buy, Sell, Hold) was represented more evenly, reducing bias toward the dominant class. Finally, we used a MinMaxScaler to normalize the feature values. The scaler was fitted only on the resampled training data and then applied to the validation and test data. 
 
-- Going further we will work on 
-    - Balancing of target variables since there are more hold signals
-    - finding access to a real time macroeconomics data  to improve trade accuracy,   
-    - Make better prediction test cases.
-      
+Model Choice:
+The following models were used to predict forex signals:
 
+**ARIMA**
+The Autoregressive Integrated Moving Average (ARIMA) well-suited for forecasting continuous time series data. In our case, to align with ARIMA's requirements, we modified the target variable from the categorical signal (Buy, Sell, Hold) to a continuous variable, future_return. This allows ARIMA to forecast future returns, which can then be interpreted indirectly to inform Buy, Sell, or Hold decisions based on thresholds or strategy rules.**[placeholder for accuracy number]**
 
+**[placeholder for graph and interpretation]**
+
+**Ensemble Approach** 
+**Random Forest** 
+Random Forest is used to classify Buy, Sell, or Hold signals based on a variety of features. We believed it will do a better classification by capturing complex relationships between input features and target signals, while also handling feature importance efficiently. **[placeholder for accuracy number]**
+
+**[placeholder for graph and interpretation]**
+
+**Neural Network Approach**
+**RNN**
+Recurrent Neural Networks (RNNs) are designed to capture temporal dependencies in sequential data. We used RNN model to capture short-term patterns in forex market data by retaining information from previous time steps, making them well-suited for time series forecasting and signal classification. **[placeholder for accuracy number]**
+
+**[placeholder for graph and interpretation]**
+
+**LSTM**
+Long Short-Term Memory (LSTM) networks are an advanced type of RNN designed to capture both short and long term dependencies in sequential data.LSTMs were applied for their ability to model complex temporal patterns in forex market trends more effectively.
+**[placeholder for accuracy number]**
+
+**[placeholder for graph and interpretation]**
+
+**Observation and Conclusion**
+
+**Future Work**
