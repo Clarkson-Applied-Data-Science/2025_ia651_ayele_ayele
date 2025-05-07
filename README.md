@@ -50,7 +50,7 @@ The correlation matrix highlights which features have the highest correlations b
   
 ## Feature Importance
 
-![Feature Importance](figures/FeatureImportance.png)
+![Feature Importance](figures/FeatureImportances.png)
 
 
 ## Model Selection
