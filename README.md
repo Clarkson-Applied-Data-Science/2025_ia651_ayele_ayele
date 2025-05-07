@@ -36,7 +36,7 @@ X: Features extracted from the dataset (open, high, low, close, volume) along wi
 Y: Target variable representing trading signals — Buy (1), Sell (2), Hold (0).
 
 
-Feature Correlation
+Feature Correlation:
 
 **[Placeholder: Feature Correlation Image and Interpretation]**
 
