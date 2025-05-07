@@ -65,9 +65,24 @@ The following models were used to predict forex signals:
 
 The Autoregressive Integrated Moving Average (ARIMA) is well-suited for forecasting continuous time series data. In our case, to align with ARIMA's requirements, we modified the target variable from the categorical signal (Buy, Sell, Hold) to a continuous variable, future_return. This allows ARIMA to forecast future returns, which can then be interpreted indirectly to inform Buy, Sell, or Hold decisions based on thresholds or strategy rules.  
 
+
+**Confusion Matrix**
 ![Confusion Matrix](figures/ARIMAConfusion.png)
 
+**Line Graph for Actual and Predicted Values**  
 ![Actual Vs Predicted](figures/ARIMALineGraph.png)
+
+**Classification Report**
+
+| Class   | Precision | Recall | F1-Score | Support |
+|---------|-----------|--------|----------|---------|
+| Hold    | 0.65      | 0.83   | 0.73     | 42      |
+| Buy     | 0.00      | 0.00   | 0.00     | 13      |
+| Sell    | 0.29      | 0.18   | 0.22     | 11      |
+|         |           |        |          |         |
+| **Accuracy**      |           |        | **0.56**     | **66**     |
+| **Macro Avg**     | 0.31      | 0.34   | 0.32     | 66      |
+| **Weighted Avg**  | 0.46      | 0.56   | 0.50     | 66      |
 
 
 #### Ensemble Approach
@@ -75,17 +90,50 @@ The Autoregressive Integrated Moving Average (ARIMA) is well-suited for forecast
 **Random Forest**  
 Random Forest is used to classify Buy, Sell, or Hold signals based on a variety of features. We believed it will do a better classification by capturing complex relationships between input features and target signals, while also handling feature importance efficiently.  
 
+
+**Confusion Matrix**
 ![Confusion Matrix](figures/RandomForestConfusion.png)
 
+**Line Graph for Actual and Predicted Values**  
 ![Actual Vs Predicted](figures/RandomForestLineGraph.png)
+
+**Classification Report**
+
+| Class            | Precision | Recall | F1-Score | Support |
+| ---------------- | --------- | ------ | -------- | ------- |
+| 0                | 1.00      | 0.75   | 0.86     | 4       |
+| 1                | 0.91      | 0.74   | 0.82     | 39      |
+| 2                | 0.69      | 0.92   | 0.79     | 24      |
+|                  |           |        |          |         |
+| **Accuracy**     |           |        | **0.81** | **67**  |
+| **Macro Avg**    | 0.86      | 0.80   | 0.82     | 67      |
+| **Weighted Avg** | 0.83      | 0.81   | 0.81     | 67      |
+
 
 #### Neural Network Approach
 **LSTM**  
 Long Short-Term Memory (LSTM) networks are an advanced type of RNN designed to capture both short and long-term dependencies in sequential data. LSTMs were applied for their ability to model complex temporal patterns in forex market trends more effectively.  
 
+
+**Confusion Matrix**
 ![Confusion Matrix](figures/LSTMconfusion.png)
 
+**Line Graph for Actual and Predicted Values**  
 ![Actual Vs Predicted](figures/LstmLinegraph.png)
+
+
+**Classification Report**
+
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| Hold  | 0.20      | 0.50   | 0.29     | 4       |
+| Buy   | 0.78      | 0.92   | 0.85     | 39      |
+| Sell  | 0.91      | 0.42   | 0.57     | 24      |
+|       |           |        |          |         |
+| **Accuracy**      |         |        | **0.72** | **67** |
+| **Macro Avg**     | 0.63    | 0.61   | 0.57     | 67      |
+| **Weighted Avg**  | 0.79    | 0.72   | 0.71     | 67      |
+
 
 ## Observation and Conclusion
 
@@ -93,9 +141,25 @@ Long Short-Term Memory (LSTM) networks are an advanced type of RNN designed to c
 **RNN**  
 Recurrent Neural Networks (RNNs) are designed to capture temporal dependencies in sequential data. We used the RNN model to capture short-term patterns in forex market data by retaining information from previous time steps, making them well-suited for time series forecasting and signal classification.  
 
+
+**Confusion Matrix**
 ![Confusion Matrix](figures/RNNConfusion.png)
 
+**Line Graph for Actual and Predicted Values**  
 ![Actual Vs Predicted](figures/RNNLineGraph.png)
+
+
+**Classification Report**
+
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| Hold  | 0.50      | 0.75   | 0.60     | 4       |
+| Buy   | 0.78      | 0.92   | 0.85     | 39      |
+| Sell  | 0.87      | 0.54   | 0.67     | 24      |
+|       |           |        |          |         |
+| **Accuracy**      |         |        | **0.78** | **67** |
+| **Macro Avg**     | 0.72    | 0.74   | 0.70     | 67      |
+| **Weighted Avg**  | 0.80    | 0.78   | 0.77     | 67      |
 
 Observation and Conclusion
 
