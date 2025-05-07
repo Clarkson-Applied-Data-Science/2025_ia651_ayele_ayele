@@ -41,6 +41,13 @@ Our dataset also showed imbalancement in target classes (Buy/Sell/Hold), influen
 
 ![Feature correlation matrix](figures/correlation.png)
 
+The correlation matrix highlights which features have the highest correlations between the price movements data and the feature engineered price-based indicators:
+- **Open** and **Close** prices, a strong positive correlation.
+- **High** and **Low** prices, strong positive correlation. As expected from a financial time series data these features would be closely related, since the price movements are within the same intervals. 
+- **RSI (Relative Strength Index)**: Shows a moderate correlation with all price movement features(open,close,high,low).
+- **Pip Movement** : has a weak negative correlation with all the price movement features. But has a 0.9 relation with **ROC(Rate of Change)**, which is an important factor in making trading decisions.
+- **Volatility Bands**: The upper and lower bands show a strong correlation with **High** and **Low** prices, respectively, as they are derived from price volatility.
+  
 ## Feature Importance
 
 ![Feature Importance](figures/FeatureImportance.png)
