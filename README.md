@@ -67,9 +67,11 @@ The Autoregressive Integrated Moving Average (ARIMA) is well-suited for forecast
 
 
 **Confusion Matrix**
+
 ![Confusion Matrix](figures/ARIMAConfusion.png)
 
 **Line Graph for Actual and Predicted Values**  
+
 ![Actual Vs Predicted](figures/ARIMALineGraph.png)
 
 **Classification Report**
@@ -92,9 +94,11 @@ Random Forest is used to classify Buy, Sell, or Hold signals based on a variety 
 
 
 **Confusion Matrix**
+
 ![Confusion Matrix](figures/RandomForestConfusion.png)
 
 **Line Graph for Actual and Predicted Values**  
+
 ![Actual Vs Predicted](figures/RandomForestLineGraph.png)
 
 **Classification Report**
@@ -116,9 +120,11 @@ Long Short-Term Memory (LSTM) networks are an advanced type of RNN designed to c
 
 
 **Confusion Matrix**
+
 ![Confusion Matrix](figures/LSTMconfusion.png)
 
 **Line Graph for Actual and Predicted Values**  
+
 ![Actual Vs Predicted](figures/LstmLinegraph.png)
 
 
@@ -135,17 +141,16 @@ Long Short-Term Memory (LSTM) networks are an advanced type of RNN designed to c
 | **Weighted Avg**  | 0.79    | 0.72   | 0.71     | 67      |
 
 
-## Observation and Conclusion
-
-## Future Work
 **RNN**  
 Recurrent Neural Networks (RNNs) are designed to capture temporal dependencies in sequential data. We used the RNN model to capture short-term patterns in forex market data by retaining information from previous time steps, making them well-suited for time series forecasting and signal classification.  
 
 
 **Confusion Matrix**
+
 ![Confusion Matrix](figures/RNNConfusion.png)
 
 **Line Graph for Actual and Predicted Values**  
+
 ![Actual Vs Predicted](figures/RNNLineGraph.png)
 
 
@@ -161,6 +166,7 @@ Recurrent Neural Networks (RNNs) are designed to capture temporal dependencies i
 | **Macro Avg**     | 0.72    | 0.74   | 0.70     | 67      |
 | **Weighted Avg**  | 0.80    | 0.78   | 0.77     | 67      |
 
-Observation and Conclusion
 
-Future Work
+## Observation and Conclusion
+
+## Future Work
