@@ -41,6 +41,11 @@ Our dataset also showed imbalancement in target classes (Buy/Sell/Hold), influen
 
 ![Feature correlation matrix](figures/correlation.png)
 
+## Feature Importance
+
+![Feature Importance](figures/FeatureImportance.png)
+
+
 ## Model Selection
 
 The task is a classification problem, where we predict discrete classes (Buy/Sell/Hold).
@@ -63,7 +68,7 @@ The following models were used to predict forex signals:
 
 #### ARIMA
 
-The Autoregressive Integrated Moving Average (ARIMA) is well-suited for forecasting continuous time series data. In our case, to align with ARIMA's requirements, we modified the target variable from the categorical signal (Buy, Sell, Hold) to a continuous variable, future_return. This allows ARIMA to forecast future returns, which can then be interpreted indirectly to inform Buy, Sell, or Hold decisions based on thresholds or strategy rules.  
+The Autoregressive Integrated Moving Average (ARIMA) is well-suited for forecasting continuous time series data. In our case, to align with ARIMA's requirements, we used the target variable future_return a continous variable. This allows ARIMA to forecast future returns, which can then be interpreted indirectly to inform Buy, Sell, or Hold decisions based on thresholds or strategy rules.  
 
 
 **Confusion Matrix**
