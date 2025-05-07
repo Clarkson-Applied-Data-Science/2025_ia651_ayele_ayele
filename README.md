@@ -67,7 +67,7 @@ The Autoregressive Integrated Moving Average (ARIMA) is well-suited for forecast
 
 ![Confusion Matrix](figures/ARIMAConfusion.png)
 
-![Actual Vs Predicted](figures/priceVsPredictors.png)
+![Actual Vs Predicted](figures/ARIMALineGraph.png)
 
 
 #### Ensemble Approach
