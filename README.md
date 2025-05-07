@@ -178,32 +178,6 @@ Recurrent Neural Networks (RNNs) are designed to capture temporal dependencies i
 | **Macro Avg**     | 0.72    | 0.74   | 0.70     | 67      |
 | **Weighted Avg**  | 0.80    | 0.78   | 0.77     | 67      |
 
-## Conclusion and Observations
-
-### Model Performance Overview
-
-1. **ARIMA Model**
-   - The **ARIMA** model performed with an accuracy of **56%**, primarily struggling with the classification of the "Buy" and "Sell" signals due to its linear nature and the class imbalance in the dataset.
-   - **Precision and Recall for "Buy" and "Sell"**: Both of these classes exhibited very poor performance, indicating that ARIMA is not suited for capturing the complexities of short-term financial market movements for trading.
-
-2. **Random Forest Model**
-   - The **Random Forest** model delivered the best performance with an **accuracy of 81%**.
-   - It demonstrated a strong ability to predict the **"Buy"** class with high precision and recall, making it the most reliable model for generating buy signals.
-   - The **"Hold"** class showed perfect precision (1.00), and the **"Sell"** class was predicted with balanced performance, making this model a good all-rounder for trading decisions.
-   - This model handled the class imbalance much better than others, likely due to its ensemble nature.
-
-3. **LSTM Model**
-   - The **LSTM** model achieved an **accuracy of 72%**.
-   - It performed well in identifying **"Buy"** signals, with high precision and recall (0.78 and 0.92, respectively).
-   - However, it faced challenges with the **"Hold"** class, exhibiting lower precision (0.50) but decent recall (0.75).
-   - The **"Sell"** class performance was reasonable, with 0.87 precision but lower recall (0.42), indicating that it is more cautious in predicting sell signals.
-
-4. **RNN Model**
-   - The **RNN** model reached an **accuracy of 78%**.
-   - Like LSTM, it performed well for the **"Buy"** class, showing high recall (0.92) and good precision (0.78).
-   - **Hold** precision was moderate (0.50), but recall was solid (0.75), reflecting some struggle with the low-frequency "Hold" signals.
-   - The **"Sell"** class was handled with precision (0.87) but at the cost of lower recall (0.54), showing a cautious approach to predicting sell signals.
-
 
 ## Conclusion and Observations
 
@@ -242,6 +216,7 @@ Recurrent Neural Networks (RNNs) are designed to capture temporal dependencies i
 
 ## Future Work
 
-- Revisit the ARIMA model by engineering or finding a more suitable continuous target feature that helps give better forecasting
+- Fine tune RNN since it gives close accuracy score to Random forest, and they are well-suited for time series forecasting and signal classification.
 - Explore ways to integrate FRED data by engineering time aligned features that can be matched to OANDA’s timestamped records.
 - Fine-tune threshold values for classification models to improve **signal** precision in live trading scenarios.
+- Revisit the ARIMA model by engineering or finding a more suitable continuous target feature that helps give better forecasting
