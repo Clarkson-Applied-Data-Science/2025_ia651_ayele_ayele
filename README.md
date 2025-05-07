@@ -117,9 +117,9 @@ Random Forest is used to classify Buy, Sell, or Hold signals based on a variety 
 
 | Class            | Precision | Recall | F1-Score | Support |
 | ---------------- | --------- | ------ | -------- | ------- |
-| 0                | 1.00      | 0.75   | 0.86     | 4       |
-| 1                | 0.91      | 0.74   | 0.82     | 39      |
-| 2                | 0.69      | 0.92   | 0.79     | 24      |
+| Hold             | 1.00      | 0.75   | 0.86     | 4       |
+| Buy              | 0.91      | 0.74   | 0.82     | 39      |
+| Sell             | 0.69      | 0.92   | 0.79     | 24      |
 |                  |           |        |          |         |
 | **Accuracy**     |           |        | **0.81** | **67**  |
 | **Macro Avg**    | 0.86      | 0.80   | 0.82     | 67      |
@@ -178,7 +178,70 @@ Recurrent Neural Networks (RNNs) are designed to capture temporal dependencies i
 | **Macro Avg**     | 0.72    | 0.74   | 0.70     | 67      |
 | **Weighted Avg**  | 0.80    | 0.78   | 0.77     | 67      |
 
+## Conclusion and Observations
 
-## Observation and Conclusion
+### Model Performance Overview
+
+1. **ARIMA Model**
+   - The **ARIMA** model performed with an accuracy of **56%**, primarily struggling with the classification of the "Buy" and "Sell" signals due to its linear nature and the class imbalance in the dataset.
+   - **Precision and Recall for "Buy" and "Sell"**: Both of these classes exhibited very poor performance, indicating that ARIMA is not suited for capturing the complexities of short-term financial market movements for trading.
+
+2. **Random Forest Model**
+   - The **Random Forest** model delivered the best performance with an **accuracy of 81%**.
+   - It demonstrated a strong ability to predict the **"Buy"** class with high precision and recall, making it the most reliable model for generating buy signals.
+   - The **"Hold"** class showed perfect precision (1.00), and the **"Sell"** class was predicted with balanced performance, making this model a good all-rounder for trading decisions.
+   - This model handled the class imbalance much better than others, likely due to its ensemble nature.
+
+3. **LSTM Model**
+   - The **LSTM** model achieved an **accuracy of 72%**.
+   - It performed well in identifying **"Buy"** signals, with high precision and recall (0.78 and 0.92, respectively).
+   - However, it faced challenges with the **"Hold"** class, exhibiting lower precision (0.50) but decent recall (0.75).
+   - The **"Sell"** class performance was reasonable, with 0.87 precision but lower recall (0.42), indicating that it is more cautious in predicting sell signals.
+
+4. **RNN Model**
+   - The **RNN** model reached an **accuracy of 78%**.
+   - Like LSTM, it performed well for the **"Buy"** class, showing high recall (0.92) and good precision (0.78).
+   - **Hold** precision was moderate (0.50), but recall was solid (0.75), reflecting some struggle with the low-frequency "Hold" signals.
+   - The **"Sell"** class was handled with precision (0.87) but at the cost of lower recall (0.54), showing a cautious approach to predicting sell signals.
+
+
+## Conclusion and Observations
+
+### Model Performance Overview
+
+1. **ARIMA Model**
+   - The **ARIMA** model performed with an accuracy of **56%**, struggling with the classification of the "Buy" and "Sell" signals
+   - **Precision and Recall for "Buy" and "Sell"**: Both of these classes exhibited very poor performance, indicating that ARIMA is not suited to capture complexities of short-term financial movements for trading.
+
+2. **Random Forest Model**
+   - The **Random Forest** model performed best with an **accuracy of 81%**.
+   - It demonstrated a strong ability to predict the **"Buy"** class with high precision and recall, making it the most reliable model for generating buy signals.
+   - The **"Hold"** class had perfect precision 1.00, and the **"Sell"** class was predicted with balanced performance
+
+3. **LSTM Model**
+   - The **LSTM** model achieved an **accuracy of 72%**.
+   - It performed well in identifying **"Buy"** signals, with high precision and recall 0.78 and 0.92, respectively.
+   - It faced challenges with the **"Hold"** class, with lower precision 0.50 and recall 0.75.
+   - The **"Sell"** class performance was 0.87 precision but lower recall 0.42, indicating that it is more cautious in predicting sell signals.
+
+4. **RNN Model**
+   - The **RNN** model reached an **accuracy of 78%**.
+   - Like LSTM, it performed well for the **"Buy"** class, showing high recall 0.92 and good precision 0.78.
+   - **Hold** precision was 0.50, but recall was 0.75, showing some struggle with the "Hold" signals.
+   - The **"Sell"** class was  0.87 but with recall 0.54, showing a cautious approach to predicting sell signals.
+
+
+### Key Observations
+
+- **Best Performing Model**: The **Random Forest** model outperformed others with the highest accuracy 81% and good overall performance across all classes. It demonstrated balanced precision and recall, particularly excelling in predicting **"Buy"** signals.
+  
+- **Class Imbalance Handling**: **Random Forest** performed well in handling the class imbalance, but **ARIMA** and **LSTM** models struggled with the **"Hold"** class due to the lower frequency in the dataset. **Random Forest**  was able to manage the imbalance, resulting in more stable and reliable predictions.
+
+- **Model Comparison**: Overall, the **Random Forest** model emerged as the most suitable for this project, but the **LSTM** and **RNN** models also showed good performance. The neural network shows a bit precaution when predicting the **Sell** signals
+
 
 ## Future Work
+
+- Revisit the ARIMA model by engineering or finding a more suitable continuous target feature that helps give better forecasting
+- Explore ways to integrate FRED data by engineering time aligned features that can be matched to OANDA’s timestamped records.
+- Fine-tune threshold values for classification models to improve **signal** precision in live trading scenarios.
