@@ -8,7 +8,7 @@ The project explains how we can apply machine learning algorithms for forex mark
 
 **OANDA**: Foreign exchange market real-time data collected via API.  
 The data contains:  
-- **time**: Timestamp of each price action (30-minute intervals).  
+- **time**: Timestamp of each price action (1 hour interval).  
 - **open, high, low, close**: Prices for each interval.  
 - **volume**: The volume traded during the interval.
 
@@ -18,7 +18,7 @@ The goal is to provide predictions of Buy/Sell signals for the forex market. The
 
 ## Process Overview
 
-We initially downloaded a dataset with identical structure to OANDA forex data but realized it did not provide real-time updates. Hence, we decided to use OANDA forex data only and applied feature engineering techniques on (open, high, low, close, volume, time). To improve the accuracy of predictions, macroeconomic data from FRED; however, OANDA updates in 30-minute intervals, while FRED updates quarterly/yearly. So, we decided to drop the extra dataset as it was adding less variance to our data.
+We initially downloaded a dataset with identical structure to OANDA forex data but realized it did not provide real-time updates. Hence, we decided to use OANDA forex data only and applied feature engineering techniques on (open, high, low, close, volume, time). To improve the accuracy of predictions, macroeconomic data from FRED; however, OANDA updates in 1 hour intervals, while FRED updates quarterly/yearly. So, we decided to drop the extra dataset as it was adding less variance to our data.
 
 Aside from the incompatibility between the two datasets, we also aim to focus on swing trading in this project, which requires short to medium-term price movements, something that the infrequently updated FRED data lacks.
 
@@ -65,7 +65,7 @@ To make a realistic evaluation, the dataset was chronologically ordered and spli
 - **Validation Data**: 15% of the mid-range data  
 - **Test Data**: Final 15% representing the most recent data  
 
-This time-based splitting approach avoids lookahead bias that would have been caused due to the 30-minute interval records, ensuring that future values are not leaked into the training process. The feature data was prepared by dropping non-numeric and identifier columns *(date_only, time, signal)* and separating the target variable *signal*, which represents Buy, Sell, or Hold actions.
+This time-based splitting approach avoids lookahead bias that would have been caused due to the 1 hour interval records, ensuring that future values are not leaked into the training process. The feature data was prepared by dropping non-numeric and identifier columns *(date_only, time, signal)* and separating the target variable *signal*, which represents Buy, Sell, or Hold actions.
 
 To address class imbalance, RandomOverSampler from imblearn was applied to the training set. This step resampled the data to ensure that each class (Buy, Sell, Hold) was represented more evenly, reducing bias toward the dominant class. Finally, we used a MinMaxScaler to normalize the feature values. The scaler was fitted only on the resampled training data and then applied to the validation and test data.
 
